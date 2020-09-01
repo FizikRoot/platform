@@ -32,7 +32,7 @@ local function wrap_func(function_name, func)
     return function(...)
         return function_execution_time:observe_latency({
             method = function_name,
-        }, finish - start)
+        }, func, ...)
     end
 end
 
