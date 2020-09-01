@@ -3,7 +3,7 @@ package = "platform"
 version = "v-1"
 
 source = {
-   url = "git://github.com/shmel1k/platform.git",
+   url = "git://github.com/FizikRoot/platform.git",
    branch = "master"
 }
 
