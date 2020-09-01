@@ -30,18 +30,9 @@ end
 
 local function wrap_func(function_name, func)
     return function(...)
-        local start = clock.monotonic()
-        local response = clock.bench(func, ...)
-        local finish = clock.monotonic()
-
-        function_execution_time:observe(finish - start, {
+        return function_execution_time:observe_latency({
             method = function_name,
-        })
-        function_cpu_execution_time:observe(response[1], {
-            method = function_name,
-        })
-
-        return response[2]
+        }, finish - start)
     end
 end
 
