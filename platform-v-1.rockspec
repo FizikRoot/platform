@@ -22,6 +22,7 @@ dependencies = {
     "lua >= 5.1, < 5.4",
     "metrics >= 1.0.0",
     "http >= 1.0.0",
+    "clock",
 }
 
 build = {
