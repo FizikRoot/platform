@@ -26,7 +26,7 @@ end
 
 local function wrap_func(function_name, func)
     return function(...)
-        return pcall(func, ...)
+        return func(...)
     end
 end
 
