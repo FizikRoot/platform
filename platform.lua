@@ -3,6 +3,7 @@ require('strict').on()
 log = require('log')
 clock = require('clock')
 metrics = require('metrics')
+local function_execution_time = metrics.histogram('metrics_function_execution_time')
 
 metrics.enable_default_metrics()
 
@@ -26,7 +27,9 @@ end
 
 local function wrap_func(function_name, func)
     return function(...)
-        return func(...)
+        return function_execution_time:observe_latency({
+            method = function_name,
+        }, func, ...)
     end
 end
 
