@@ -9,10 +9,6 @@ metrics.enable_default_metrics()
 local httpd = require('http.server')
 local http_handler = require('metrics.plugins.prometheus').collect_http
 
-local function_execution_time = metrics.histogram('metrics_function_execution_time')
-local function_cpu_execution_time = metrics.histogram('metrics_function_cpu_execution_time')
-
-
 local function start_metrics_server(port)
     httpd.new('0.0.0.0', port):route({
         path = '/metrics',
@@ -30,9 +26,7 @@ end
 
 local function wrap_func(function_name, func)
     return function(...)
-        return function_execution_time:observe_latency({
-            method = function_name,
-        }, func, ...)
+        return pcall(func, ...)
     end
 end
 
